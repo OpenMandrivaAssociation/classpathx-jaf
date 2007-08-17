@@ -4,7 +4,7 @@
 
 Name:           classpathx-jaf
 Version:        1.1.1
-Release:        %mkrel 2.2
+Release:        %mkrel 2.3
 Epoch:          0
 Summary:        GNU JavaBeans(tm) Activation Framework
 

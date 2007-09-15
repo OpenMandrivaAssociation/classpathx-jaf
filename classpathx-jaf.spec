@@ -4,7 +4,7 @@
 
 Name:           classpathx-jaf
 Version:        1.1.1
-Release:        %mkrel 2.3
+Release:        %mkrel 2.4
 Epoch:          0
 Summary:        GNU JavaBeans(tm) Activation Framework
 
@@ -17,8 +17,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 #Vendor:        JPackage Project
 #Distribution:  JPackage
 %if %{gcj_support}
-Requires(post): java-gcj-compat
-Requires(postun): java-gcj-compat
 BuildRequires:  java-gcj-compat-devel
 %else
 BuildRequires:  java-devel

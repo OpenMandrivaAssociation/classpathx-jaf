@@ -22,8 +22,8 @@ BuildRequires:  java-gcj-compat-devel
 BuildRequires:  java-devel
 BuildArch:      noarch
 %endif
-Requires(post): %{_sbindir}/update-alternatives
-Requires(postun): %{_sbindir}/update-alternatives
+Requires(post): update-alternatives
+Requires(postun): update-alternatives
 BuildRequires:  jpackage-utils >= 0:1.5
 BuildRequires:  java-devel >= 0:1.4.2
 Provides:       jaf = 0:%{jafver}

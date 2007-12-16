@@ -4,7 +4,7 @@
 
 Name:           classpathx-jaf
 Version:        1.1.1
-Release:        %mkrel 2.4
+Release:        %mkrel 2.5
 Epoch:          0
 Summary:        GNU JavaBeans(tm) Activation Framework
 
@@ -24,7 +24,7 @@ BuildArch:      noarch
 %endif
 Requires(post): update-alternatives
 Requires(postun): update-alternatives
-BuildRequires:  jpackage-utils >= 0:1.5
+BuildRequires:  java-rpmbuild >= 0:1.5
 BuildRequires:  java-devel >= 0:1.4.2
 Provides:       jaf = 0:%{jafver}
 Provides:       activation = 0:%{jafver}

@@ -13,7 +13,6 @@ License:        LGPL
 URL:            http://www.gnu.org/software/classpathx/jaf/jaf.html
 Source0:        http://ftp.gnu.org/gnu/classpathx/activation-%{version}.tar.bz2
 #Source1:       http://ftp.gnu.org/gnu/classpathx/activation-1.0.tar.gz.sig
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 #Vendor:        JPackage Project
 #Distribution:  JPackage
 %if %{gcj_support}

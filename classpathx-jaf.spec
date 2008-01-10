@@ -4,7 +4,7 @@
 
 Name:           classpathx-jaf
 Version:        1.1.1
-Release:        %mkrel 2.5
+Release:        %mkrel 2.5.0
 Epoch:          0
 Summary:        GNU JavaBeans(tm) Activation Framework
 
@@ -63,13 +63,14 @@ export JAVADOC=%{javadoc}
 pushd %{buildroot}%{_javadir}
 %{__mv} activation.jar %{name}-%{version}.jar
 %{__ln_s} %{name}-%{version}.jar %{name}.jar
-%{__ln_s} %{name}-%{version}.jar jaf-%{jafver}.jar
-%{__ln_s} %{name}-%{version}.jar activation-%{jafver}.jar
-%{__ln_s} activation-%{jafver}.jar activation.jar
+%{__ln_s} %{name}-%{version}.jar jaf.jar
+%{__ln_s} %{name}-%{version}.jar activation.jar
 popd
 %{__mkdir_p} 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
 %{__cp} -a docs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 %{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
+%{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/jaf
+%{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/activation
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
@@ -80,6 +81,7 @@ popd
 
 %post
 %{_sbindir}/update-alternatives --install %{_javadir}/jaf.jar jaf %{_javadir}/%{name}.jar 10001
+%{_sbindir}/update-alternatives --install %{_javadir}/activation.jar jaf %{_javadir}/%{name}.jar 10001
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
@@ -87,6 +89,7 @@ popd
 %postun
 if [ "$1" = "0" ]; then
     %{_sbindir}/update-alternatives --remove jaf %{_javadir}/%{name}.jar
+    %{_sbindir}/update-alternatives --remove activation %{_javadir}/%{name}.jar
 fi
 
 %if %{gcj_support}
@@ -95,10 +98,12 @@ fi
 
 %post javadoc
 %{_sbindir}/update-alternatives --install %{_javadocdir}/jaf jaf-javadoc %{_javadocdir}/%{name} 10001
+%{_sbindir}/update-alternatives --install %{_javadocdir}/jaf activation-javadoc %{_javadocdir}/%{name} 10001
 
 %postun javadoc
 if [ "$1" = "0" ]; then
     %{_sbindir}/update-alternatives --remove jaf-javadoc %{_javadocdir}/%{name}
+    %{_sbindir}/update-alternatives --remove activation-javadoc %{_javadocdir}/%{name}
 fi
 
 if [ $1 -eq 0 ]; then
@@ -110,9 +115,10 @@ fi
 %doc AUTHORS ChangeLog COPYING
 %{_javadir}/%{name}.jar
 %{_javadir}/%{name}-%{version}.jar
-%{_javadir}/activation-%{jafver}.jar
-%{_javadir}/activation.jar
-%{_javadir}/jaf-%{jafver}.jar
+#%{_javadir}/activation-%{jafver}.jar
+%ghost %{_javadir}/activation.jar
+%ghost %{_javadir}/jaf.jar
+#%{_javadir}/jaf-%{jafver}.jar
 
 %if %{gcj_support}
 %dir %{_libdir}/gcj/%{name}
@@ -123,5 +129,6 @@ fi
 %defattr(644,root,root,755)
 %doc %{_javadocdir}/%{name}-%{version}
 %doc %{_javadocdir}/%{name}
-
+%ghost %doc %{_javadocdir}/jaf
+%ghost %doc %{_javadocdir}/activation
 
